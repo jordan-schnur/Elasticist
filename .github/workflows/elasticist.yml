@@ -1,21 +1,26 @@
-name: Rust
+name: Elasticist Dev Check
 
 on:
   push:
+  pull_request:
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check:
+  base:
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Lint
         run: cargo clippy -- -D clippy::suspicious -D clippy::style -W clippy::pedantic
+
       - name: Build
-        run: cargo build --verbose
+        run: cargo build --features deny-warnings
+
       - name: Run tests
         run: cargo test --verbose

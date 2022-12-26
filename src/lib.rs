@@ -2,20 +2,47 @@ pub struct Node {
     pub position: Vector2,
     pub size: Vector2,
     pub options: Options,
+    pub nodes: Vec<Node>,
 }
 
 impl Node {
-    pub fn new(position: Vector2, size: Vector2, options: Options) -> Node {
+    pub fn new() -> Node {
+        Node {
+            position: Vector2::zero(),
+            size: Vector2::zero(),
+            options: Options {..Default::default()},
+            nodes: Vec::new(),
+        }
+    }
+
+    pub fn from(position: Vector2, size: Vector2, options: Options) -> Node {
         Node {
             position,
             size,
             options,
+            nodes: Vec::new(),
         }
+    }
+    
+    pub fn parent(&self) -> &Node {
+    }
+
+    fn updateNode(&self, parent: &Node) -> &Self {
+
+    }
+
+    pub fn calculate(&self) -> &Node {
+        let iter = self.nodes.iter();
+
+        for node in self.nodes.iter() {
+
+        }
+
+        self
     }
 }
 
 pub struct Options {
-    // Container Options
     pub flex_direction: FlexDirection,
     pub flex_wrap: FlexWrap,
     pub justify_content: JustifyContent, // TODO: Implement safe/unsafe
@@ -128,17 +155,15 @@ pub enum AlignContent {
     SpaceAround,
 }
 
+#[derive(Debug)]
 pub struct Vector2 {
     pub x: i64,
     pub y: i64,
 }
 
 impl Vector2 {
-    pub fn new(x: Option<i64>, y: Option<i64>) -> Vector2 {
-        Vector2 {
-            x: x.unwrap_or(0),
-            y: y.unwrap_or(0),
-        }
+    pub fn new(x: i64, y: i64) -> Vector2 {
+        Vector2 { x, y }
     }
 
     pub fn zero() -> Vector2 {
@@ -149,5 +174,11 @@ impl Vector2 {
         self.x = 10;
 
         self
+    }
+}
+
+impl PartialEq for Vector2 {
+    fn eq(&self, other: &Self) -> bool {
+        self.x == other.x && self.y == other.y
     }
 }

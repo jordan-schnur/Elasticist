@@ -3,6 +3,7 @@ name: Elasticist Dev Check
 on:
   push:
   pull_request:
+    types: [ opened, reopened ]
 
 env:
   CARGO_TERM_COLOR: always

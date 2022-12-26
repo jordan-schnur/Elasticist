@@ -10,12 +10,4 @@ fn main() {
     println!("Before Method: Column gap {:?}. Row Gap {:?}", node.options.column_gap, node.options.row_gap);
     node.options.gap(10);
     println!("After Method: Column gap {:?}. Row Gap {:?}", node.options.column_gap, node.options.row_gap);
-
-    let v: Vec<i64> = Vec::new();
-
-    if !v.is_empty() {
-        println!("Is not empty");
-    } else {
-        println!("Is empty");
-    }
 }
